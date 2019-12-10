@@ -6,9 +6,9 @@ const MiniCssExtractPlugin = require( "mini-css-extract-plugin" );
 
 const plugins = [
     new FriendlyErrorsWebpackPlugin(),
-    new MiniCssExtractPlugin({
+    new MiniCssExtractPlugin( {
         filename: "styles.css",
-    }),
+    } ),
 ];
 
 if ( !dev ) {
