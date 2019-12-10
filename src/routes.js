@@ -2,6 +2,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Secret from "./components/Secret";
+import Login from "./components/login"
 
 export default [
     {
@@ -9,6 +10,11 @@ export default [
         component: Home,
         exact: true,
     },
+		{
+			path: "/login",
+			component: Login,
+			exact: true,
+		},
     {
         path: "/about",
         component: About,
