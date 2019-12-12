@@ -33,7 +33,7 @@ module.exports = {
             "node_modules",
         ],
         alias: {
-          '@': paths.appSrc
+          '@': path.resolve(__dirname, "./src")
         }
     },
     module: {
