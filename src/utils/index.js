@@ -1,20 +1,19 @@
 /**
- * 
+ *
  * 对象转URL
  */
 function urlEncode(data) {
-    var _result = [];
-    for (var key in data){
-        var value = data[key];
-        if (value.constructor === Array){
-            console.log('get请求参数不支持数组');
-        }else{
-            _result.push(key + '=' + value);
-        }
-    }
-    return _result.join('&');
+	var _result = [];
+	for (var key in data) {
+		var value = data[key];
+		if (value.constructor === Array) {
+			console.log('get请求参数不支持数组');
+		} else {
+			_result.push(key + '=' + value);
+		}
+	}
+	return _result.join('&');
 }
-
 
 
 /**
@@ -24,10 +23,10 @@ function urlEncode(data) {
  * @returns value {string} 参数值
  **/
 function getQueryString(name) {
-    let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-    let r = window.location.search.substr(1).match(reg);
-    if (r !== null) return unescape(r[2]);
-    return null;
+	let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	let r = window.location.search.substr(1).match(reg);
+	if (r !== null) return unescape(r[2]);
+	return null;
 }
 
 /**
@@ -38,34 +37,34 @@ function getQueryString(name) {
  * @returns {string} 格式化后的字符串
  **/
 function fillZero(number, n) {
-    return (Array(n).join(0) + number).slice(-n);
+	return (Array(n).join(0) + number).slice(-n);
 }
 
 /**
-* @author William Cui
-* @description 根据后端返回的时间戳格式化成指定的格式
-* @param timestamp {number} 需要格式化的时间戳
-* @param patternStr {string} 指定的格式字符串 默认是'YYYY-MM-DD hh:mm:ss'
-* @returns {string} 格式化后的日期时间字符串
-Y: 代表年份， M: 代表月份， D: 代表一个月中的第几天， h: 代表小时， m: 代表分, s: 代表秒
-**/
+ * @author William Cui
+ * @description 根据后端返回的时间戳格式化成指定的格式
+ * @param timestamp {number} 需要格式化的时间戳
+ * @param patternStr {string} 指定的格式字符串 默认是'YYYY-MM-DD hh:mm:ss'
+ * @returns {string} 格式化后的日期时间字符串
+ Y: 代表年份， M: 代表月份， D: 代表一个月中的第几天， h: 代表小时， m: 代表分, s: 代表秒
+ **/
 function stampToDate(timestamp, patternStr) {
-    patternStr = patternStr || 'YYYY-MM-DD hh:mm:ss';
-    const patternArray = patternStr.match(/\w+/g);
-    const date = new Date(timestamp);
-    const dateObj = {
-        Y: date.getFullYear(),
-        M: date.getMonth() + 1,
-        D: date.getDate(),
-        h: date.getHours(),
-        m: date.getMinutes(),
-        s: date.getSeconds()
-    };
-    patternArray.forEach(pattern => {
-        let replaceStr = fillZero(dateObj[pattern[0]], pattern.length);
-        patternStr = patternStr.replace(pattern, replaceStr);
-    });
-    return patternStr;
+	patternStr = patternStr || 'YYYY-MM-DD hh:mm:ss';
+	const patternArray = patternStr.match(/\w+/g);
+	const date = new Date(timestamp);
+	const dateObj = {
+		Y: date.getFullYear(),
+		M: date.getMonth() + 1,
+		D: date.getDate(),
+		h: date.getHours(),
+		m: date.getMinutes(),
+		s: date.getSeconds()
+	};
+	patternArray.forEach(pattern => {
+		let replaceStr = fillZero(dateObj[pattern[0]], pattern.length);
+		patternStr = patternStr.replace(pattern, replaceStr);
+	});
+	return patternStr;
 }
 
 /**
@@ -75,7 +74,7 @@ function stampToDate(timestamp, patternStr) {
  * @returns {number} 时间戳
  **/
 function dateToStamp(dateStr) {
-    return new Date(dateStr).getTime();
+	return new Date(dateStr).getTime();
 }
 
-export { getQueryString, stampToDate, dateToStamp,urlEncode };
+export {getQueryString, stampToDate, dateToStamp, urlEncode};

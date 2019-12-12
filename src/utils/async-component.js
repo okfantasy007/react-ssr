@@ -2,49 +2,49 @@
 /**
  * 用于react router4 code splitting
  */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 /**
  * @param {Function} loadComponent e.g: () => import('./component')
  * @param {ReactNode} placeholder  未加载前的占位
  */
 export default (loadComponent, placeholder = null) => {
-  class AsyncComponent extends Component {
-    unmount = false
+	class AsyncComponent extends Component {
+		unmount = false
 
-    constructor() {
-      super()
+		constructor() {
+			super()
 
-      this.state = {
-        component: null
-      }
-    }
+			this.state = {
+				component: null
+			}
+		}
 
-    componentWillUnmount() {
-      this.unmount = true
-    }
+		componentWillUnmount() {
+			this.unmount = true
+		}
 
-    async componentDidMount() {
-      const {default: component} = await loadComponent()
+		async componentDidMount() {
+			const {default: component} = await loadComponent()
 
-      if (this.unmount) {
-        return
-      }
+			if (this.unmount) {
+				return
+			}
 
-      this.setState({
-        component: component
-      })
-    }
+			this.setState({
+				component: component
+			})
+		}
 
-    render() {
-      const C = this.state.component
+		render() {
+			const C = this.state.component
 
-      return (
-      C ? <C {...this.props}></C> : placeholder
-      )
-    }
-  }
+			return (
+				C ? <C {...this.props}></C> : placeholder
+			)
+		}
+	}
 
-  return AsyncComponent
+	return AsyncComponent
 }
 
